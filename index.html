@@ -1416,10 +1416,11 @@
         <div class="upload-files-card">
           <h3 class="upload-files-title">Upload Files</h3>
           <div class="upload-zone upload-zone--white upload-zone--sharp">
+            <input type="file" id="file-input-1" class="file-input" accept=".pdf,.xlsx,.xls,.jpg,.jpeg,.png,.gif,.bmp,.scanner" style="display: none;">
             <div class="upload-icon"></div>
             <p class="upload-text">Drag and drops file here</p>
             <p class="upload-info">File supported: PDF, XSLS, image, Scanner</p>
-            <button class="upload-button upload-button--inside upload-button--sharp" type="button">Choose File</button>
+            <button class="upload-button upload-button--inside upload-button--sharp" type="button" onclick="document.getElementById('file-input-1').click()">Choose File</button>
             <p class="upload-info">Maximum Size: 5mb</p>
           </div>
         </div>
@@ -1427,10 +1428,11 @@
         <div class="upload-files-card">
           <h3 class="upload-files-title">Upload Files</h3>
           <div class="upload-zone upload-zone--white">
+            <input type="file" id="file-input-2" class="file-input" accept=".pdf,.xlsx,.xls,.jpg,.jpeg,.png,.gif,.bmp,.scanner" style="display: none;">
             <div class="upload-icon"></div>
             <p class="upload-text">Drag and drops file here</p>
             <p class="upload-info">File supported: PDF, XSLS, image, Scanner</p>
-            <button class="upload-button upload-button--inside" type="button">Choose File</button>
+            <button class="upload-button upload-button--inside" type="button" onclick="document.getElementById('file-input-2').click()">Choose File</button>
             <p class="upload-info">Maximum Size: 5mb</p>
           </div>
         </div>
@@ -1438,8 +1440,9 @@
         <div class="upload-files-card">
           <h3 class="upload-files-title">Upload Files</h3>
           <div class="upload-zone upload-zone--white upload-zone--sharp">
+            <input type="file" id="file-input-3" class="file-input" accept=".pdf,.xlsx,.xls,.jpg,.jpeg,.png,.gif,.bmp,.scanner" style="display: none;">
             <div class="upload-icon"></div>
-            <p class="upload-text">Drag and drops file here <a href="#">Choose File</a></p>
+            <p class="upload-text">Drag and drops file here <a href="#" onclick="event.preventDefault(); document.getElementById('file-input-3').click();">Choose File</a></p>
           </div>
           <div class="upload-info-row">
             <p class="upload-info upload-info--left">File supported: PDF, XSLS, image, Scanner</p>
@@ -1450,8 +1453,9 @@
         <div class="upload-files-card">
           <h3 class="upload-files-title">Upload Files</h3>
           <div class="upload-zone upload-zone--white">
+            <input type="file" id="file-input-4" class="file-input" accept=".pdf,.xlsx,.xls,.jpg,.jpeg,.png,.gif,.bmp,.scanner" style="display: none;">
             <div class="upload-icon"></div>
-            <p class="upload-text">Drag and drops file here <a href="#">Choose File</a></p>
+            <p class="upload-text">Drag and drops file here <a href="#" onclick="event.preventDefault(); document.getElementById('file-input-4').click();">Choose File</a></p>
           </div>
           <div class="upload-info-row">
             <p class="upload-info upload-info--left">File supported: PDF, XSLS, image, Scanner</p>
@@ -1462,10 +1466,11 @@
         <div class="upload-files-card">
           <h3 class="upload-files-title upload-files-title--center">Upload Files</h3>
           <div class="upload-zone upload-zone--white upload-zone--sharp">
+            <input type="file" id="file-input-5" class="file-input" accept=".pdf,.xlsx,.xls,.jpg,.jpeg,.png,.gif,.bmp,.scanner" style="display: none;">
             <div class="upload-icon"></div>
             <p class="upload-text">Drag and drops file here</p>
             <p class="upload-info">File supported: PDF, XSLS, image, Scanner</p>
-            <button class="upload-button upload-button--inside upload-button--sharp" type="button">Choose File</button>
+            <button class="upload-button upload-button--inside upload-button--sharp" type="button" onclick="document.getElementById('file-input-5').click()">Choose File</button>
             <p class="upload-info">Maximum Size: 5mb</p>
           </div>
         </div>
@@ -1473,10 +1478,11 @@
         <div class="upload-files-card">
           <h3 class="upload-files-title upload-files-title--center">Upload Files</h3>
           <div class="upload-zone upload-zone--white">
+            <input type="file" id="file-input-6" class="file-input" accept=".pdf,.xlsx,.xls,.jpg,.jpeg,.png,.gif,.bmp,.scanner" style="display: none;">
             <div class="upload-icon"></div>
             <p class="upload-text">Drag and drops file here</p>
             <p class="upload-info">File supported: PDF, XSLS, image, Scanner</p>
-            <button class="upload-button upload-button--inside" type="button">Choose File</button>
+            <button class="upload-button upload-button--inside" type="button" onclick="document.getElementById('file-input-6').click()">Choose File</button>
             <p class="upload-info">Maximum Size: 5mb</p>
           </div>
         </div>
@@ -1662,6 +1668,57 @@
             toggle.classList.add('custom-dropdown-text--selected');
           }
           closeAllDropdowns();
+        });
+      });
+
+      // ============================================
+      // FILE UPLOAD FUNCTIONALITY
+      // ============================================
+      
+      /**
+       * Maximum file size: 5MB
+       */
+      const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB in bytes
+      
+      /**
+       * Handle file selection
+       * @param {HTMLInputElement} fileInput - File input element
+       */
+      function handleFileSelect(fileInput) {
+        const file = fileInput.files[0];
+        if (!file) return;
+        
+        // Validate file size
+        if (file.size > MAX_FILE_SIZE) {
+          alert('File size exceeds 5MB limit. Please choose a smaller file.');
+          fileInput.value = ''; // Reset file input
+          return;
+        }
+        
+        // Get the upload zone container
+        const uploadZone = fileInput.closest('.upload-zone');
+        if (uploadZone) {
+          // Update upload text to show selected file name
+          const uploadText = uploadZone.querySelector('.upload-text');
+          if (uploadText) {
+            const originalText = uploadText.dataset.originalText || uploadText.textContent;
+            if (!uploadText.dataset.originalText) {
+              uploadText.dataset.originalText = uploadText.textContent;
+            }
+            uploadText.textContent = `Selected: ${file.name}`;
+            uploadText.style.color = '#2B44E5';
+            uploadText.style.fontWeight = '500';
+          }
+        }
+        
+        console.log('File selected:', file.name, 'Size:', (file.size / 1024 / 1024).toFixed(2), 'MB');
+      }
+      
+      // Initialize file input handlers
+      const fileInputs = document.querySelectorAll('.file-input');
+      fileInputs.forEach((fileInput, index) => {
+        fileInput.addEventListener('change', function() {
+          handleFileSelect(this);
         });
       });
     });
