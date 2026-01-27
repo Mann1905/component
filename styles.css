@@ -1580,109 +1580,6 @@ h2 {
   transform: translateX(2.34vw);
 }
 
-.radio-section {
-  display: flex;
-  flex-direction: column;
-  gap: 3.13vw;
-}
-
-.radio-buttons-row {
-  display: flex;
-  gap: 3.13vw;
-  align-items: center;
-}
-
-.radio-button-icon {
-  width: 2.5vw;
-  height: 2.5vw;
-  border-radius: 50%;
-  position: relative;
-}
-
-.radio-button-icon--filled {
-  background-color: #2B44E5;
-  border: 0.16vw solid #2B44E5;
-}
-
-.radio-button-icon--filled::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 1.25vw;
-  height: 1.25vw;
-  border-radius: 50%;
-  background-color: #2B44E5;
-}
-
-.radio-button-icon--outline {
-  background-color: transparent;
-  border: 0.16vw solid #2B44E5;
-}
-
-.radio-button-icon--outline::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 1.25vw;
-  height: 1.25vw;
-  border-radius: 50%;
-  border: 0.16vw solid #2B44E5;
-}
-
-.radio-button-icon--dot {
-  background-color: transparent;
-  border: 0.16vw solid #2B44E5;
-}
-
-.radio-button-icon--dot::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0.94vw;
-  height: 0.94vw;
-  border-radius: 50%;
-  background-color: #2B44E5;
-}
-
-.radio-button-icon--semi {
-  background-color: transparent;
-  border: 0.16vw solid #2B44E5;
-}
-
-.radio-button-icon--semi::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 1.25vw;
-  height: 1.25vw;
-  border-radius: 50%;
-  background-color: rgba(43, 68, 229, 0.3);
-}
-
-.radio-button-icon--solid-dot {
-  background-color: #2B44E5;
-  border: 0.16vw solid #2B44E5;
-}
-
-.radio-button-icon--solid-dot::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0.94vw;
-  height: 0.94vw;
-  border-radius: 50%;
-  background-color: #2B44E5;
-}
 
 .search-input-grid {
   display: grid;
@@ -1758,6 +1655,31 @@ h2 {
   height: 1.88vw;
   pointer-events: none;
   z-index: 1;
+}
+
+/* Make search-icon buttons clickable */
+button.search-icon {
+  pointer-events: auto;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+button.search-icon:hover {
+  opacity: 0.8;
+}
+
+button.search-icon:active {
+  opacity: 0.6;
+}
+
+/* Remove background transparent for search-icon buttons in last row only */
+.search-input-column .search-input-row:last-child button.search-icon {
+  background-color: blue;
 }
 
 .search-icon--magnify {
@@ -1882,47 +1804,6 @@ h2 {
   border-radius: var(--radius-md);
 }
 
-.segmented-control-row {
-  display: flex;
-  gap: 3.13vw;
-}
-
-.segmented-control {
-  display: flex;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 0.16vw solid #E2E8F0;
-}
-
-.segmented-control-item {
-  padding: 1.25vw 2.5vw;
-  font-size: 1.88vw;
-  font-family: inherit;
-  border: none;
-  background-color: transparent;
-  color: #000000;
-  cursor: pointer;
-  transition: var(--transition);
-  border-right: 0.16vw solid #E2E8F0;
-  outline: none;
-}
-
-.segmented-control-item:last-child {
-  border-right: none;
-}
-
-.segmented-control-item--active {
-  background-color: #2B44E5;
-  color: #FFFFFF;
-}
-
-.segmented-control-item--hover {
-  color: #2B44E5;
-}
-
-.segmented-control-item:hover {
-  background-color: rgba(173, 216, 230, 0.1);
-}
 
 .upload-files-grid {
   display: grid;
@@ -2140,4 +2021,157 @@ input.email-input {
               border-width 0.2s ease-in-out,
               background-color 0.2s ease-in-out,
               color 0.2s ease-in-out;
+}
+
+/* ============================================
+   PAGINATION
+   ============================================ */
+
+.pagination-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5vw;
+}
+
+.pagination-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5vw;
+}
+
+.pagination-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.63vw;
+  padding: 0.63vw;
+  background-color: #FFFFFF;
+  border: 0.16vw solid #E2E8F0;
+}
+
+.pagination-wrapper--sharp {
+  border-radius: 0;
+}
+
+.pagination-wrapper--rounded {
+  border-radius: var(--radius-md);
+}
+
+.pagination-wrapper--pill {
+  border-radius: var(--radius-pill);
+}
+
+.pagination-arrow {
+  width: 2.5vw;
+  height: 2.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  color: #000000;
+  font-size: 1.88vw;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+  padding: 0;
+}
+
+.pagination-arrow:hover {
+  color: #2B44E5;
+  background-color: rgba(43, 68, 229, 0.1);
+}
+
+.pagination-arrow:active {
+  background-color: rgba(43, 68, 229, 0.2);
+}
+
+.pagination-number {
+  min-width: 2.5vw;
+  height: 2.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #FFFFFF;
+  color: #000000;
+  font-size: 1.88vw;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+  padding: 0 0.94vw;
+  font-family: inherit;
+}
+
+.pagination-number:hover {
+  color: #2B44E5;
+}
+
+.pagination-number:active {
+  background-color: rgba(43, 68, 229, 0.1);
+}
+
+/* Row 1: Blue Text Highlight */
+.pagination-number--text-highlight {
+  color: #2B44E5;
+  border: none;
+  background-color: #FFFFFF;
+}
+
+.pagination-number--text-highlight:hover {
+  color: #2B44E5;
+}
+
+/* Row 2: Solid Blue Circle Background */
+.pagination-number--filled {
+  background-color: #2B44E5;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 50%;
+  width: 2.5vw;
+  height: 2.5vw;
+  padding: 0;
+}
+
+.pagination-number--filled:hover {
+  background-color: #1E32B8;
+  color: #FFFFFF;
+}
+
+/* Row 3: Blue Circle Outline with Rounded Border */
+.pagination-number--outline {
+  color: #2B44E5;
+  background-color: #FFFFFF;
+  border: 0.16vw solid #2B44E5;
+  border-radius: 50%;
+  width: 2.5vw;
+  height: 2.5vw;
+  padding: 0;
+}
+
+.pagination-number--outline:hover {
+  background-color: rgba(43, 68, 229, 0.1);
+  border-color: #1E32B8;
+  color: #1E32B8;
+}
+
+.pagination-ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  font-size: 1.88vw;
+  padding: 0 0.31vw;
+  user-select: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+  font-family: inherit;
+}
+
+.pagination-ellipsis:hover {
+  color: #2B44E5;
 }
